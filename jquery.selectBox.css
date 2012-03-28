@@ -29,11 +29,6 @@
 	cursor: default;
 }
 
-.selectBox-dropdown:focus,
-.selectBox-dropdown:focus .selectBox-arrow {
-	border-color: #666;
-}
-
 .selectBox-dropdown.selectBox-menuShowing {
 	-moz-border-radius-bottomleft: 0;
 	-moz-border-radius-bottomright: 0;
@@ -60,6 +55,12 @@
 	border-left: solid 1px #BBB;
 }
 
+.selectBox-active,
+.selectBox-active .selectBox-arrow,
+.selectBox-dropdown:focus,
+.selectBox-dropdown:focus .selectBox-arrow {
+	border-color: #666;
+}
 
 /* Dropdown menu */
 .selectBox-dropdown-menu {
