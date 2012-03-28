@@ -47,15 +47,10 @@ if(jQuery) (function($) {
 					.attr('tabindex', parseInt(select.attr('tabindex')))
 					.css('display', 'inline-block')
 					.bind('focus.selectBox', function() {
-						if( this !== document.activeElement && document.body !== document.activeElement ) $(document.activeElement).blur();
-						if( control.hasClass('selectBox-active') ) return;
-						control.addClass('selectBox-active');
-						select.trigger('focus');
+						focus(control, select);
 					})
 					.bind('blur.selectBox', function() {
-						if( !control.hasClass('selectBox-active') ) return;
-						control.removeClass('selectBox-active');
-						select.trigger('blur');
+						blur(control, select);
 					});
 				
 				if( !$(window).data('selectBox-bindings') ) {
@@ -167,12 +162,6 @@ if(jQuery) (function($) {
 							if(triggerData && triggerData._selectBox === true) return;
 							hideMenus();
 						})
-						.bind('focus.selectBox', function(event, triggerData){
-							focus(control);
-						})
-						.bind('blur.selectBox', function(event, triggerData){
-							blur(control);
-						})
 						.insertAfter(select);
 					
 					// Set label width
@@ -189,13 +178,12 @@ if(jQuery) (function($) {
 					.data('selectBox-control', control)
 					.data('selectBox-settings', settings)
 					.bind('focus.selectBox', function(event, triggerData) {
-//						control.triggerHandler("focus");
-						control.focus();
+						console.log("Focus on original select");
+						control.trigger("focus");
 					})
 
 					.bind('blur.selectBox', function(event, triggerData) {
-//						control.triggerHandler("blur");
-						control.blur();
+						control.trigger("blur");
 					});
 
 			};
@@ -347,15 +335,22 @@ if(jQuery) (function($) {
 			/**
 			 * Focus event on selectBox
 			 */
-			var focus = function(select){
+			var focus = function(control, select){
+				console.log("Focus on selectbox");
+				if( this !== document.activeElement && document.body !== document.activeElement ) $(document.activeElement).blur();
+				if( control.hasClass('selectBox-active') ) return;
+				control.addClass('selectBox-active');
+//				select.trigger('focus');
 				select.addClass("selectBox-focus");
-				console.log(select);
 			};
 
 			/**
 			 * Blur event on selectBox
 			 */
-			var blur = function(select){
+			var blur = function(control, select){
+				if( !control.hasClass('selectBox-active') ) return;
+				control.removeClass('selectBox-active');
+//				select.trigger('blur');
 				select.removeClass("selectBox-focus");
 			};
 			
