@@ -1,3 +1,9 @@
+/* Original select */
+.selectBox-original-select{
+	position: absolute;
+	left: -9999px;
+}
+
 /* Dropdown control */
 .selectBox-dropdown {
 	min-width: 150px;

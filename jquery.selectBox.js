@@ -179,10 +179,9 @@ if(jQuery) (function($) {
 
 				// Store data for later use and show the control
 				select
-					.addClass('selectBox')
+					.addClass('selectBox-original-select')
 					.data('selectBox-control', control)
-					.data('selectBox-settings', settings)
-					.hide();
+					.data('selectBox-settings', settings);
 				
 			};
 
