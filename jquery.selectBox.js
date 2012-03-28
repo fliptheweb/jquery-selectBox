@@ -166,7 +166,13 @@ if(jQuery) (function($) {
 						.bind('close.selectBox', function(event, triggerData) {
 							if(triggerData && triggerData._selectBox === true) return;
 							hideMenus();
-						})						
+						})
+						.bind('focus.selectBox', function(event, triggerData){
+							focus(control);
+						})
+						.bind('blur.selectBox', function(event, triggerData){
+							blur(control);
+						})
 						.insertAfter(select);
 					
 					// Set label width
@@ -181,8 +187,17 @@ if(jQuery) (function($) {
 				select
 					.addClass('selectBox-original-select')
 					.data('selectBox-control', control)
-					.data('selectBox-settings', settings);
-				
+					.data('selectBox-settings', settings)
+					.bind('focus.selectBox', function(event, triggerData) {
+//						control.triggerHandler("focus");
+						control.focus();
+					})
+
+					.bind('blur.selectBox', function(event, triggerData) {
+//						control.triggerHandler("blur");
+						control.blur();
+					});
+
 			};
 
 
@@ -327,6 +342,21 @@ if(jQuery) (function($) {
 					.removeData('selectBox-settings').data('selectBox-settings', null)
 					.show();
 
+			};
+
+			/**
+			 * Focus event on selectBox
+			 */
+			var focus = function(select){
+				select.addClass("selectBox-focus");
+				console.log(select);
+			};
+
+			/**
+			 * Blur event on selectBox
+			 */
+			var blur = function(select){
+				select.removeClass("selectBox-focus");
 			};
 			
 			
