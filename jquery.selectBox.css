@@ -89,6 +89,7 @@
 	overflow: auto;
 }
 
+.selectBox-active,
 .selectBox-inline:focus {
 	border-color: #666;
 }

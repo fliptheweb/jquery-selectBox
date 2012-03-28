@@ -172,18 +172,16 @@ if(jQuery) (function($) {
 					
 				}
 
-				// Store data for later use and show the control
+				// Store data for later use, hide original select and call focus and blur handlers
 				select
 					.addClass('selectBox-original-select')
 					.data('selectBox-control', control)
 					.data('selectBox-settings', settings)
 					.bind('focus.selectBox', function(event, triggerData) {
-						console.log("Focus on original select");
-						control.trigger("focus");
+						control.triggerHandler("focus");
 					})
-
 					.bind('blur.selectBox', function(event, triggerData) {
-						control.trigger("blur");
+						control.triggerHandler("blur");
 					});
 
 			};
@@ -336,12 +334,9 @@ if(jQuery) (function($) {
 			 * Focus event on selectBox
 			 */
 			var focus = function(control, select){
-				console.log("Focus on selectbox");
-				if( this !== document.activeElement && document.body !== document.activeElement ) $(document.activeElement).blur();
+//				if( this !== document.activeElement && document.body !== document.activeElement ) $(document.activeElement).blur();
 				if( control.hasClass('selectBox-active') ) return;
 				control.addClass('selectBox-active');
-//				select.trigger('focus');
-				select.addClass("selectBox-focus");
 			};
 
 			/**
@@ -350,8 +345,6 @@ if(jQuery) (function($) {
 			var blur = function(control, select){
 				if( !control.hasClass('selectBox-active') ) return;
 				control.removeClass('selectBox-active');
-//				select.trigger('blur');
-				select.removeClass("selectBox-focus");
 			};
 			
 			
